@@ -14,17 +14,13 @@ namespace kursovaya.Clients
     {
         private HttpClient client;
         private static string adress;
-        //private static string apiKey;
 
         public RecipeClients()
         {
             adress = Const.adress;
-            //apiKey = Const.apiKey;
-
             client = new HttpClient();
             client.BaseAddress = new Uri(adress);
         }
-
 
         public async Task<RandomRecipe> GetRandomRecipe()
         {
@@ -33,19 +29,49 @@ namespace kursovaya.Clients
             var content = response.Content.ReadAsStringAsync().Result;
 
             var result = JsonConvert.DeserializeObject<RandomRecipe>(content);
+            
             return result;
         }
 
-        //public async Task<RecipeByName> GetRecipeByName()
+        public async Task<RecipeByName> GetRecipeByName(string title)
+        {
+            var response = await client.GetAsync($"ByName?title={title}");
+            response.EnsureSuccessStatusCode();
+            var content = response.Content.ReadAsStringAsync().Result;
+
+            var result = JsonConvert.DeserializeObject<RecipeByName>(content);
+            return result;
+        }
+
+        public async Task<RandomCocktail> GetRandomCocktail()
+        {
+            var response = await client.GetAsync("RandomCocktails"); ;
+            response.EnsureSuccessStatusCode();
+            var content = response.Content.ReadAsStringAsync().Result;
+
+            var result = JsonConvert.DeserializeObject<RandomCocktail>(content);
+
+            return result;
+        }
+
+        //public async Task<RecipeByIngredient> GetRecipeByIngredient(string ingredient)
         //{
-        //    var response = await client.GetAsync("/recipes/complexSearch?query=pasta&number=2&apiKey=1686191358ed4208988e2f8fd63fd3ba&addRecipeInformation=true&fillIngredients=true");
+        //    var response = await client.GetAsync($"ByIngredient?ingredient={ingredient}");
         //    response.EnsureSuccessStatusCode();
         //    var content = response.Content.ReadAsStringAsync().Result;
 
         //    var result = JsonConvert.DeserializeObject<RecipeByName>(content);
         //    return result;
+        //} 
+        //public async Task<RandomCocktail> GetRandomCocktail(int offset)
+        //{
+        //    var response = await client.GetAsync("RandomCocktail?offset={offset}"); ;
+        //    response.EnsureSuccessStatusCode();
+        //    var content = response.Content.ReadAsStringAsync().Result;
+
+        //    var result = JsonConvert.DeserializeObject<RandomCocktail>(content);
+
+        //    return result;
         //}
-
-
     }
 }
