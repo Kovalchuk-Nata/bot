@@ -33,13 +33,13 @@ namespace jop.Controllers
             return recipe;
         }
 
-        //[HttpGet("ByName")]
-        //public async Task<RecipeByName> GetRecipeByName()
-        //{
-        //    var recipebyname = await _recipeClient.GetRecipeByName();
+        [HttpGet("ByName")]
+        public async Task<RecipeByName> GetRecipeByName(string title)
+        {
+            var recipebyname = await _recipeClient.GetRecipeByName(title);
 
-        //    return recipebyname;
-        //}
+            return recipebyname;
+        }
 
     }
 }
