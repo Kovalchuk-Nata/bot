@@ -168,18 +168,34 @@
     <Compile Include="..\tgBot\tgclient.cs">
       <Link>Commands\tgclient.cs</Link>
     </Compile>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\Commands\GetRecipeByName.cs" />
+    <Compile Include="Commands\GetString.cs" />
+    <Compile Include="Component1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Component1.Designer.cs">
+      <DependentUpon>Component1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Const.cs" />
     <Compile Include="Controllers\RandomRecipeController.cs" />
+    <Compile Include="Models\RandomCocktail.cs" />
     <Compile Include="Models\RandomRecipe.cs" />
     <Compile Include="..\tgBot\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
+    <Compile Include="Models\RecipeByName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextCT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Component1.resx">
+      <DependentUpon>Component1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
